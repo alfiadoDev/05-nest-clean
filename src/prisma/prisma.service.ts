@@ -15,11 +15,11 @@ export class PrismaService
     })
   }
 
-  onModuleInit() {
-    return this.$connect()
+  async onModuleInit() {
+    await this.$connect()
   }
 
-  onModuleDestroy() {
-    return this.$disconnect()
+  async onModuleDestroy() {
+    await this.$disconnect()
   }
 }
