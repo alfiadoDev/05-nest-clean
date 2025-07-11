@@ -5,9 +5,11 @@ import tsConfigPaths from 'vitest-tsconfig-paths'
 
 export default defineConfig({
   test: {
+    environment: 'node',
     include: ['**/*.e2e-spec.ts'],
     globals: true,
     root: './',
+    setupFiles: ['./test/setup-e2e.setup.ts'],
   },
   plugins: [
     tsConfigPaths(),
@@ -20,6 +22,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Ensure Vitest correctly resolves TypeScript path aliases
+      'generated/prisma': resolve(__dirname, './generated/prisma/index.js'),
       src: resolve(__dirname, './src'),
     },
   },
