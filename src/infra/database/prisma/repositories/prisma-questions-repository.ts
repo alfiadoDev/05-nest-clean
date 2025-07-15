@@ -2,9 +2,14 @@ import type { PaginationParams } from '@/core/repositories/pagination-params'
 import type { QuestionRepository } from '@/domain/forum/application/repositories/question-repository'
 import type { Question } from '@/domain/forum/enterprise/entities/question'
 import { Injectable } from '@nestjs/common'
+import { PrismaService } from '../prisma.service'
+import { PrismaQuestionMapper } from '../mappers/prisma-question-mapper'
 
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionRepository {
+  // eslint-disable-next-line prettier/prettier
+  constructor(private prisma: PrismaService) { }
+
   async create(question: Question): Promise<void> {
     throw new Error('Method not implemented.')
   }
@@ -14,7 +19,13 @@ export class PrismaQuestionsRepository implements QuestionRepository {
   }
 
   async findById(id: string): Promise<Question | null> {
-    throw new Error('Method not implemented.')
+    const question = await this.prisma.question.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    return question ? PrismaQuestionMapper.toDomain(question) : null
   }
 
   async delete(question: Question): Promise<void> {
