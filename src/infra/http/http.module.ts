@@ -4,6 +4,7 @@ import { AuthenticateController } from './controllers/authenticate.controller'
 import { CreateQuestionController } from './controllers/create-question.controller'
 import { FetchRecentsquestionstroller } from './controllers/fetch-recents-questions.controller'
 import { DatabaseModule } from '../database/database.module'
+import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question'
 
 @Module({
   imports: [DatabaseModule],
@@ -13,6 +14,7 @@ import { DatabaseModule } from '../database/database.module'
     CreateQuestionController,
     FetchRecentsquestionstroller,
   ],
+  providers: [CreateQuestionUseCase],
 })
 // eslint-disable-next-line prettier/prettier
 export class HttpModule { }
