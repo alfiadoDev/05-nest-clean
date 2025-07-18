@@ -11,6 +11,8 @@ import { HashCompare } from '@/domain/forum/application/cryptography/hash-compar
     { provide: HashGenerator, useClass: BcryptHasher },
     { provide: HashCompare, useClass: BcryptHasher },
   ],
+
+  exports: [Encrypter, HashGenerator, HashCompare],
 })
 // eslint-disable-next-line prettier/prettier
 export class CryptographyModule { }
